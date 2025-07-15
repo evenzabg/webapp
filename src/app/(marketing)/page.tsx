@@ -1,8 +1,10 @@
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image";
 import {
   CalendarCheck,
   CreditCard,
@@ -15,175 +17,141 @@ import {
   Ticket,
 } from 'lucide-react'
 
+
 async function requestQuote(formData: FormData) {
-  'use server'
+  "use server";
   await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/quote`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      name: formData.get('name'),
-      email: formData.get('email'),
-      idea: formData.get('idea'),
+      name: formData.get("name"),
+      email: formData.get("email"),
+      idea: formData.get("idea"),
     }),
-  })
+  });
 }
 
 export default function Home() {
   return (
-    <main className="flex flex-col font-sans">
-      <section className="relative py-24 text-center overflow-hidden">
-        <div className="relative z-10 space-y-4">
-          <h1 className="text-6xl font-bold tracking-tight bg-gradient-to-r from-sky-500 to-green-400 bg-clip-text text-transparent">
-            Evenza
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            All-in-one platform for unforgettable live events
-          </p>
-          <Button className="mt-4" asChild>
-            <a href="#quote">Plan your event</a>
-          </Button>
-        </div>
-        <Ticket className="absolute left-10 top-1/3 size-12 text-sky-300 opacity-30 animate-float1" />
-        <Ticket className="absolute right-10 top-1/4 size-10 text-green-300 opacity-30 animate-float2" />
-        <Ticket className="absolute left-1/2 bottom-8 size-8 text-sky-200 opacity-30 animate-float3" />
-      </section>
-
-      <section className="py-12 bg-secondary">
-        <h2 className="text-center text-3xl font-semibold mb-6">
-          Events We Handle
-        </h2>
-        <div className="flex overflow-x-auto gap-6 px-6 scroll-smooth snap-x snap-mandatory">
-          <div className="snap-center shrink-0 w-64 text-center">
-            <Image
-              src="https://images.unsplash.com/photo-1464375117522-1311d0299063?auto=format&fit=crop&w=640&q=60"
-              alt="Concerts"
-              width={256}
-              height={160}
-              className="rounded-lg object-cover"
-              unoptimized
-            />
-            <p className="mt-2 font-medium">Concerts</p>
-          </div>
-          <div className="snap-center shrink-0 w-64 text-center">
-            <Image
-              src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=640&q=60"
-              alt="Trainings"
-              width={256}
-              height={160}
-              className="rounded-lg object-cover"
-              unoptimized
-            />
-            <p className="mt-2 font-medium">Trainings</p>
-          </div>
-          <div className="snap-center shrink-0 w-64 text-center">
-            <Image
-              src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=640&q=60"
-              alt="Conferences"
-              width={256}
-              height={160}
-              className="rounded-lg object-cover"
-              unoptimized
-            />
-            <p className="mt-2 font-medium">Conferences</p>
-          </div>
-          <div className="snap-center shrink-0 w-64 text-center">
-            <Image
-              src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=640&q=60"
-              alt="Tours"
-              width={256}
-              height={160}
-              className="rounded-lg object-cover"
-              unoptimized
-            />
-            <p className="mt-2 font-medium">Tours</p>
-          </div>
-          <div className="snap-center shrink-0 w-64 text-center">
-            <Image
-              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=640&q=60"
-              alt="Organized Vacations"
-              width={256}
-              height={160}
-              className="rounded-lg object-cover"
-              unoptimized
-            />
-            <p className="mt-2 font-medium">Organized Vacations</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16" id="goers">
-        <h2 className="text-center text-3xl font-semibold mb-10">
-          For Event Goers
-        </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 px-6">
-          <div className="text-center space-y-2">
-            <MapPin className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">Find events near you</h3>
-            <p className="text-sm text-muted-foreground">
-              Explore concerts, trainings and more around your location.
-            </p>
-          </div>
-          <div className="text-center space-y-2">
-            <CreditCard className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">Buy tickets effortlessly</h3>
-            <p className="text-sm text-muted-foreground">
-              Secure checkout and instant access to your passes.
-            </p>
-          </div>
-          <div className="text-center space-y-2">
-            <CalendarCheck className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">Real-time schedules</h3>
-            <p className="text-sm text-muted-foreground">
-              Stay updated as organizers publish changes live.
-            </p>
-          </div>
-          <div className="text-center space-y-2">
-            <MessageSquare className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">Chat with organizers</h3>
-            <p className="text-sm text-muted-foreground">
-              Ask questions or connect with fellow attendees.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-muted" id="organizers">
-        <h2 className="text-center text-3xl font-semibold mb-4">
-          For Organizers
-        </h2>
-        <p className="text-center max-w-2xl mx-auto text-muted-foreground mb-10">
-          Created by veteran event professionals, Evenza streamlines every step of organizing live experiences.
+    <main className="flex flex-col font-sans"><<<<<<< fix-and-enhance-landing-page-design
+      <section className="relative overflow-hidden py-24 text-center space-y-6 bg-secondary">
+        <i className="fa-solid fa-ticket text-primary absolute left-10 top-10 text-3xl animate-ticket1" />
+        <i className="fa-solid fa-ticket text-accent absolute right-1/4 top-20 text-2xl animate-ticket2" />
+        <i className="fa-solid fa-ticket text-primary absolute left-1/3 bottom-10 text-4xl animate-ticket3" />
+        <h1 className="text-6xl font-bold tracking-tight">Evenza</h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          All-in-one platform created by expert organizers to make every live
+          event unforgettable
         </p>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 px-6">
-          <div className="text-center space-y-2">
-            <Lightbulb className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">Expert assistance</h3>
-            <p className="text-sm text-muted-foreground">
-              Our team guides you from planning to execution.
-            </p>
+        <Button className="mt-4" asChild>
+          <a href="#quote">Plan your event</a>
+        </Button>
+      </section>
+
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto overflow-x-auto flex gap-6 snap-x snap-mandatory pb-4">
+          <div className="shrink-0 snap-center text-center space-y-2">
+            <Image
+              src="https://cdn.evenza.com/images/concert.jpg"
+              alt="Concerts"
+              width={300}
+              height={200}
+              className="rounded-lg object-cover"
+            />
+            <h3 className="font-semibold">Concerts</h3>
           </div>
-          <div className="text-center space-y-2">
-            <BarChart className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">All-in-one ticketing</h3>
-            <p className="text-sm text-muted-foreground">
-              Sell tickets, track attendance and view stats in one place.
-            </p>
+          <div className="shrink-0 snap-center text-center space-y-2">
+            <Image
+              src="https://cdn.evenza.com/images/training.jpg"
+              alt="Trainings"
+              width={300}
+              height={200}
+              className="rounded-lg object-cover"
+            />
+            <h3 className="font-semibold">Trainings</h3>
           </div>
-          <div className="text-center space-y-2">
-            <Megaphone className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">Marketing & volunteers</h3>
-            <p className="text-sm text-muted-foreground">
-              Promote your event and manage helpers effortlessly.
-            </p>
+          <div className="shrink-0 snap-center text-center space-y-2">
+            <Image
+              src="https://cdn.evenza.com/images/conference.jpg"
+              alt="Conferences"
+              width={300}
+              height={200}
+              className="rounded-lg object-cover"
+            />
+            <h3 className="font-semibold">Conferences</h3>
           </div>
-          <div className="text-center space-y-2">
-            <Bot className="mx-auto text-primary size-8" />
-            <h3 className="font-medium">Automated support</h3>
-            <p className="text-sm text-muted-foreground">
-              Use AI to answer attendee questions around the clock.
-            </p>
+          <div className="shrink-0 snap-center text-center space-y-2">
+            <Image
+              src="https://cdn.evenza.com/images/tour.jpg"
+              alt="Tours"
+              width={300}
+              height={200}
+              className="rounded-lg object-cover"
+            />
+            <h3 className="font-semibold">Tours</h3>
+          </div>
+          <div className="shrink-0 snap-center text-center space-y-2">
+            <Image
+              src="https://cdn.evenza.com/images/vacation.jpg"
+              alt="Organized Vacations"
+              width={300}
+              height={200}
+              className="rounded-lg object-cover"
+            />
+            <h3 className="font-semibold">Organized Vacations</h3>
           </div>
         </div>
+      </section>
+
+
+      <section className="py-12 bg-background">
+        <Tabs defaultValue="organizers" className="w-full">
+          <TabsList className="mx-auto mb-8">
+            <TabsTrigger value="organizers">For Organizers</TabsTrigger>
+            <TabsTrigger value="goers">For Event Goers</TabsTrigger>
+          </TabsList>
+          <TabsContent value="organizers">
+            <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto text-left">
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-user-tie text-primary text-2xl" />
+                <p>Professional guidance from veteran event organizers</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-ticket text-primary text-2xl" />
+                <p>Sell tickets, manage schedules and resources in one place</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-bullhorn text-primary text-2xl" />
+                <p>Integrated marketing tools and volunteer coordination</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-robot text-primary text-2xl" />
+                <p>AI-powered responses for attendee questions</p>
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="goers">
+            <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto text-left">
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-map-location-dot text-accent text-2xl" />
+                <p>Discover nearby events and purchase tickets effortlessly</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-comments text-accent text-2xl" />
+                <p>Chat with organizers and fellow attendees</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-bolt text-accent text-2xl" />
+                <p>Receive real-time updates, schedules and materials</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <i className="fa-solid fa-star text-accent text-2xl" />
+                <p>Leave reviews and build your event network</p>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
+
       </section>
 
       <section id="quote" className="py-16 bg-secondary">
@@ -211,9 +179,20 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="py-10 text-center text-sm text-muted-foreground">
-        All rights reserved – contact@evenza.bg · 0896604041
+      <footer className="py-10 text-center text-sm text-muted-foreground space-y-2">
+        <p>© {new Date().getFullYear()} Evenza. All rights reserved.</p>
+        <p>
+          Phone:{" "}
+          <a href="tel:0896604041" className="underline">
+            0896604041
+          </a>{" "}
+          | Email:{" "}
+          <a href="mailto:contact@evenza.bg" className="underline">
+            contact@evenza.bg
+          </a>
+        </p>
+
       </footer>
     </main>
-  )
+  );
 }
