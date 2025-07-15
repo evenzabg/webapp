@@ -1,9 +1,22 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
+import {
+  CalendarCheck,
+  CreditCard,
+  Lightbulb,
+  MapPin,
+  Megaphone,
+  MessageSquare,
+  Bot,
+  BarChart,
+  Ticket,
+} from 'lucide-react'
+
 
 async function requestQuote(formData: FormData) {
   "use server";
@@ -20,7 +33,7 @@ async function requestQuote(formData: FormData) {
 
 export default function Home() {
   return (
-    <main className="flex flex-col font-sans">
+    <main className="flex flex-col font-sans"><<<<<<< fix-and-enhance-landing-page-design
       <section className="relative overflow-hidden py-24 text-center space-y-6 bg-secondary">
         <i className="fa-solid fa-ticket text-primary absolute left-10 top-10 text-3xl animate-ticket1" />
         <i className="fa-solid fa-ticket text-accent absolute right-1/4 top-20 text-2xl animate-ticket2" />
@@ -90,6 +103,7 @@ export default function Home() {
         </div>
       </section>
 
+
       <section className="py-12 bg-background">
         <Tabs defaultValue="organizers" className="w-full">
           <TabsList className="mx-auto mb-8">
@@ -137,9 +151,10 @@ export default function Home() {
             </div>
           </TabsContent>
         </Tabs>
+
       </section>
 
-      <section id="quote" className="py-16 bg-muted">
+      <section id="quote" className="py-16 bg-secondary">
         <div className="container max-w-xl mx-auto space-y-6">
           <h2 className="text-3xl font-semibold text-center">
             Get a personalized organization quote
@@ -176,6 +191,7 @@ export default function Home() {
             contact@evenza.bg
           </a>
         </p>
+
       </footer>
     </main>
   );
